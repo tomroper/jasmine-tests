@@ -28,3 +28,30 @@ gulp serve
 gulp watch
 ```
 
+## Using Jasmine
+
+### Suite
+
+A Jasmine suite is a group of test cases that can be used to test a specific behavior of the JavaScript code (a JavaScript object or function). This begins with a call to the Jasmine global function describe with two parameters – first parameter represents the title of the test suite and second parameter represents a function that implements the test suite.
+
+```
+//This is test suite
+describe("Test Suite", function() {
+    //.....
+});
+```
+
+### Spec
+
+A Jasmine spec represents a test case inside the test suite. This begins with a call to the Jasmine global function it with two parameters – first parameter represents the title of the spec and second parameter represents a function that implements the test case.
+
+In practice, spec contains one or more expectations. Each expectation represents an assertion that can be either true or false. In order to pass the spec, all of the expectations inside the spec have to be true. If one or more expectations inside a spec is false, the spec fails.
+
+```
+//This is test suite
+describe("Test Suite", function() {
+    it("test spec", function() {
+        expect( expression ).toEqual(true);
+    }); 
+});
+```
