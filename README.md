@@ -2,6 +2,8 @@
 
 ### This repo is to learn about how to use, and setup tests in Jasmine. It's built on top of the ES6 Boilerplate repo https://github.com/tomroper/es6-babel-gulp-boilerplate
 
+#### SpecRunner will be availble at `http://localhost:3000/__tests__/SpecRunner.html`
+
 
 ### Initial setup
 
