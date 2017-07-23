@@ -76,3 +76,87 @@ should work for objects too
 * toBeCloseTo() = for precision math comparison
 * toThrow() = for testing if a function throws an exception
 * toThrowError() = for testing a specific thrown exception
+
+The Jasmine not keyword can be used with every matcher’s criteria for inverting the result. e.g.
+```
+expect(actual).not.toBe(expected);
+expect(actual).not.toBeDefined(expected);
+```
+### Disable Suites and Specs
+
+You need not to remove the code – rather just add char x in start of describe to make if xdescribe.
+
+```
+xdescribe("MathUtils", function() {
+    //code
+});
+```
+```
+describe("MathUtils", function() {
+    //Spec for sum operation
+    xit("should be able to calculate the sum of two numbers", function() {
+        expect(10).toBeSumOf(7, 3);
+    });
+});
+```
+
+### Spies
+Jasmine has test double functions called spies. A spy can stub any function and tracks calls to it and all arguments. A spy only exists in the describe or it block in which it is defined, and will be removed after each spec. To create a spy on any method, use spyOn(object, 'methodName') call.
+
+There are two matchers toHaveBeenCalled and toHaveBeenCalledWith which should be used with spies. toHaveBeenCalled matcher will return true if the spy was called; and toHaveBeenCalledWith matcher will return true if the argument list matches any of the recorded calls to the spy.
+
+```
+describe("MathUtils", function() {
+    var calc;
+ 
+    beforeEach(function() {
+        calc = new MathUtils();
+        spyOn(calc, 'sum');
+    });
+ 
+    describe("when calc is used to peform basic math operations", function(){
+         
+        //Test for sum operation
+        it("should be able to calculate sum of 3 and 5", function() {
+            //call any method
+            calc.sum(3,5);
+ 
+            //verify it got executed
+            expect(calc.sum).toHaveBeenCalled();
+            expect(calc.sum).toHaveBeenCalledWith(3,5);
+        });
+ 
+    });
+});
+```
+
+Above example is very much most basic in nature, you can use spies to verify the calls for internal methods as well. E.g. If you call method calculateInterest() on any object then you may want to check if getPrincipal(), getROI() and getTime() must have been called inside that object. Spy will help you verify these kind of assumptions.
+
+When there is not a function to spy on, jasmine.createSpy can create a bare spy. This spy acts as any other spy – tracking calls, arguments, etc. But there is no implementation behind it. Spies are JavaScript objects and can be used as such. Mostly, these spies are used as callback functions to other functions where it is needed.
+
+```
+var callback = jasmine.createSpy('callback');
+ 
+//Use it for testing
+expect(object.callback).toHaveBeenCalled();
+```
+
+If you need to define multiple such methods then you can use shortcut method jasmine.createSpyObj. e.g.
+
+```
+tape = jasmine.createSpyObj('tape', ['play', 'pause', 'stop', 'rewind']);
+tape.play();
+ 
+//Use it for testing
+ expect(tape.play.calls.any()).toEqual(true);
+```
+
+#### TRACKING PROPERTY = PURPOSE
+* .calls.any() = returns false if the spy has not been called at all, and then true once at least one call happens.
+* .calls.count() = returns the number of times the spy was called
+* .calls.argsFor(index) = returns the arguments passed to call number index
+* .calls.allArgs() = returns the arguments to all calls
+* .calls.all() = returns the context (the this) and arguments passed all calls
+* .calls.mostRecent() = returns the context (the this) and arguments for the most recent call
+* .calls.first() = returns the context (the this) and arguments for the first call
+* .calls.reset() = clears all tracking for a spy
