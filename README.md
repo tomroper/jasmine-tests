@@ -1,6 +1,6 @@
 # Jasmine Unit Testing
 
-### This repo is to learn about how to use, and setup tests in Jasmine. It's built on top of my (ES6 Boilerplate repo)[https://github.com/tomroper/es6-babel-gulp-boilerplate]
+### This repo is to learn about how to use, and setup tests in Jasmine. It's built on top of the ES6 Boilerplate repo https://github.com/tomroper/es6-babel-gulp-boilerplate
 
 
 ### Initial setup
